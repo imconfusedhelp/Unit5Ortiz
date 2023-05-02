@@ -24,7 +24,7 @@ public class Target : MonoBehaviour
 
         transform.position = RandomSpawnPos();
 
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
     }
 
     Vector3 RandomForce()
@@ -54,9 +54,9 @@ public class Target : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Destroy(gameObject);
-        if (gameObject.CompareTag("Good"))
+        if (gameObject.CompareTag("Good") &&  gameManager.isGameActive)
         {
-            gameManager.GameOver();
+            gameManager.UpdateLives(-1);
         }
     }
 }
