@@ -40,7 +40,7 @@ public class Target : MonoBehaviour
         return new Vector3(Random.Range(-xRange, xRange), ySpawnPos);
     }
 
-    // Update is called once per frame
+    /* Update is called once per frame
     private void OnMouseDown()
     {
         if (gameManager.isGameActive)
@@ -49,7 +49,7 @@ public class Target : MonoBehaviour
             Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
             gameManager.UpdateScore(pointValue);
         }
-    }
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
@@ -57,6 +57,16 @@ public class Target : MonoBehaviour
         if (gameObject.CompareTag("Good") &&  gameManager.isGameActive)
         {
             gameManager.UpdateLives(-1);
+        }
+    }
+
+    public void DestroyTarget()
+    {
+        if (gameManager.isGameActive)
+        {
+            Destroy(gameObject);
+            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+            gameManager.UpdateScore(pointValue);
         }
     }
 }

@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI livesText;
     private int lives;
 
+    public GameObject pauseScreen;
+    private bool paused;
+
     IEnumerator SpawnTarget()
     {
         while (isGameActive)
@@ -72,8 +75,28 @@ public class GameManager : MonoBehaviour
         titleScreen.gameObject.SetActive(false);
     }
 
+    void CheckForPause()
+    {
+        if (!paused)
+        {
+            paused = true;
+            pauseScreen.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            paused = false;
+            pauseScreen.SetActive(false);
+            Time.timeScale = 1;
+        }
+    }
+
     private void Update()
     {
-        
+        // if user pressed P key
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            CheckForPause();
+        }
     }
 }
